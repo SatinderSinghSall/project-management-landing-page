@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   creator: "Satinder Singh Sall",
   publisher: "Satinder Singh Sall",
 
+  verification: {
+    google: "CLiuOeX7kVXX7mFQV5wkswIWOEorAvp-yr8K4co_IhE",
+  },
+
   keywords: [
     "Satinder Singh Sall",
     "Project Management System by Satinder Singh Sall",
