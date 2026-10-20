@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, Layers3 } from "lucide-react";
 
+import CopyrightYear from "./CopyrightYear";
+
 const clientUrl = "https://project-management-satinder.vercel.app/";
 const adminUrl = "https://project-ms-admin-panel.vercel.app/";
 
@@ -91,7 +93,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Satinder Singh Sall. Project showcase.
+            © <CopyrightYear /> Satinder Singh Sall. Project showcase.
           </p>
           <p>Built with Next.js · React · Express</p>
         </div>
