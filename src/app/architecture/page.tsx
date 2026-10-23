@@ -385,7 +385,7 @@ export default function ArchitecturePage() {
                     number: "text-emerald-600 bg-emerald-50",
                     line: "bg-emerald-500",
                   },
-                }[step.color];
+                }[step.color]!;
 
                 return (
                   <div key={step.number} className="relative flex min-w-0">
