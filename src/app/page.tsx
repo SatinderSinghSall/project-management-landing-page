@@ -24,6 +24,8 @@ import {
   Workflow,
   Zap,
 } from "lucide-react";
+import AppScreenshots from "@/components/AppScreenshots";
+import HomePromoModal from "@/components/HomePromoModal";
 
 const clientUrl = "https://project-management-satinder.vercel.app/";
 const adminUrl = "https://project-ms-admin-panel.vercel.app/";
@@ -330,6 +332,8 @@ export default function Home() {
           Discover what powers the platform
         </div>
       </section>
+
+      <AppScreenshots />
 
       {/* Platform overview */}
       <section className="border-y border-slate-100 bg-white">
@@ -738,6 +742,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <HomePromoModal />
     </main>
   );
 }

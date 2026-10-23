@@ -47,6 +47,12 @@ export default function Footer() {
               </Link>
               <Link
                 className="block transition hover:text-indigo-600"
+                href="/screenshots"
+              >
+                Screenshots
+              </Link>
+              <Link
+                className="block transition hover:text-indigo-600"
                 href="/about"
               >
                 About the Developer

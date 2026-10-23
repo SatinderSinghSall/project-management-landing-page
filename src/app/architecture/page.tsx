@@ -313,78 +313,157 @@ export default function ArchitecturePage() {
       </section>
 
       {/* Request flow */}
-      <section className="border-y border-slate-100 bg-slate-50/70">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
+      <section className="relative overflow-hidden border-y border-slate-200/80 bg-gradient-to-b from-slate-50/80 via-white to-slate-50/60">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <SectionHeading
             eyebrow="Request lifecycle"
             title="From interface to data layer"
-            description="A simplified view of how a typical API-backed operation is organized in the application."
+            description="Follow the journey of a typical API-backed operation, from user interaction to database access."
           />
 
-          <div className="mt-12 grid gap-4 md:grid-cols-4">
-            {[
-              {
-                number: "01",
-                icon: PanelsTopLeft,
-                title: "Frontend",
-                description:
-                  "A user interacts with a page in the client or admin application.",
-              },
-              {
-                number: "02",
-                icon: Network,
-                title: "API request",
-                description:
-                  "The frontend service communicates with a configured backend endpoint.",
-              },
-              {
-                number: "03",
-                icon: ShieldCheck,
-                title: "Backend logic",
-                description:
-                  "Routes, middleware, controllers, and validation utilities handle the operation.",
-              },
-              {
-                number: "04",
-                icon: Database,
-                title: "Data access",
-                description:
-                  "Database operations can be handled through the configured Prisma layer.",
-              },
-            ].map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.number} className="relative">
-                  <article className="h-full rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                        <Icon size={22} />
+          {/* Flow cards */}
+          <div className="relative mt-10 sm:mt-12">
+            <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+              {[
+                {
+                  number: "01",
+                  icon: PanelsTopLeft,
+                  title: "Frontend",
+                  description:
+                    "A user interacts with a page in the client or admin application.",
+                  detail: "User interaction",
+                  color: "indigo",
+                },
+                {
+                  number: "02",
+                  icon: Network,
+                  title: "API request",
+                  description:
+                    "The frontend service communicates with a configured backend endpoint.",
+                  detail: "Request handling",
+                  color: "violet",
+                },
+                {
+                  number: "03",
+                  icon: ShieldCheck,
+                  title: "Backend logic",
+                  description:
+                    "Routes, middleware, controllers, and validation utilities handle the operation.",
+                  detail: "Application logic",
+                  color: "blue",
+                },
+                {
+                  number: "04",
+                  icon: Database,
+                  title: "Data access",
+                  description:
+                    "Database operations can be handled through the configured Prisma layer.",
+                  detail: "Database layer",
+                  color: "emerald",
+                },
+              ].map((step, index) => {
+                const Icon = step.icon;
+
+                const accents = {
+                  indigo: {
+                    icon: "bg-indigo-50 text-indigo-600 ring-indigo-100",
+                    number: "text-indigo-600 bg-indigo-50",
+                    line: "bg-indigo-500",
+                  },
+                  violet: {
+                    icon: "bg-violet-50 text-violet-600 ring-violet-100",
+                    number: "text-violet-600 bg-violet-50",
+                    line: "bg-violet-500",
+                  },
+                  blue: {
+                    icon: "bg-blue-50 text-blue-600 ring-blue-100",
+                    number: "text-blue-600 bg-blue-50",
+                    line: "bg-blue-500",
+                  },
+                  emerald: {
+                    icon: "bg-emerald-50 text-emerald-600 ring-emerald-100",
+                    number: "text-emerald-600 bg-emerald-50",
+                    line: "bg-emerald-500",
+                  },
+                }[step.color];
+
+                return (
+                  <div key={step.number} className="relative flex min-w-0">
+                    <article className="group relative flex h-full w-full flex-col rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm shadow-slate-200/30 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-100/40 sm:p-6">
+                      {/* Card header */}
+                      <div className="flex items-start justify-between gap-3">
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-xl ring-1 ring-inset transition-transform duration-300 group-hover:scale-105 ${accents.icon}`}
+                        >
+                          <Icon size={22} strokeWidth={1.8} />
+                        </div>
+
+                        <span
+                          className={`inline-flex h-8 min-w-8 items-center justify-center rounded-lg px-2 text-xs font-bold tracking-wider ${accents.number}`}
+                        >
+                          {step.number}
+                        </span>
                       </div>
-                      <span className="text-xs font-bold tracking-widest text-slate-300">
-                        {step.number}
-                      </span>
-                    </div>
-                    <h3 className="mt-5 text-base font-bold text-slate-900">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      {step.description}
-                    </p>
-                  </article>
-                  {index < 3 && (
-                    <div className="pointer-events-none absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-slate-300 md:block">
-                      <ArrowRight size={19} />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+
+                      {/* Card content */}
+                      <div className="mt-5 flex flex-1 flex-col">
+                        <h3 className="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
+                          {step.title}
+                        </h3>
+
+                        <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">
+                          {step.description}
+                        </p>
+
+                        <div className="mt-5 border-t border-slate-100 pt-4">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`h-1.5 w-1.5 shrink-0 rounded-full ${accents.line}`}
+                            />
+                            <span className="text-xs font-medium text-slate-500">
+                              {step.detail}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Progress indicator */}
+                      <div
+                        className={`absolute inset-x-5 bottom-0 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-300 group-hover:scale-x-100 sm:inset-x-6 ${accents.line}`}
+                      />
+                    </article>
+
+                    {/* Connector: desktop only */}
+                    {index < 3 && (
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -right-[18px] top-1/2 z-20 hidden -translate-y-1/2 items-center lg:flex"
+                      >
+                        <div className="relative flex w-4 items-center">
+                          <span className="h-px w-full bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-400" />
+                          <span className="absolute right-0 flex h-4 w-4 items-center justify-center rounded-full border border-indigo-100 bg-white text-indigo-500 shadow-sm">
+                            <ArrowRight size={10} strokeWidth={2.5} />
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-5 text-slate-500">
-            The exact request path, authorization checks, and database
-            operations depend on the endpoint and its implementation.
-          </p>
+          {/* Explanatory note */}
+          <div className="mx-auto mt-7 flex max-w-3xl items-start justify-center gap-2.5 rounded-xl border border-slate-200/70 bg-white/80 px-4 py-3.5 sm:mt-8 sm:items-center sm:px-5">
+            <CheckCircle2
+              size={17}
+              className="mt-0.5 shrink-0 text-indigo-500 sm:mt-0"
+            />
+            <p className="text-xs leading-5 text-slate-500 sm:text-sm sm:leading-6">
+              The exact request path, authorization checks, and database
+              operations depend on the endpoint and its implementation.
+            </p>
+          </div>
         </div>
       </section>
 
